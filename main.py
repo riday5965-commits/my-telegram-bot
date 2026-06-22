@@ -2,14 +2,15 @@ import os
 import ccxt
 from telegram.ext import Updater, CommandHandler
 
-TOKEN = os.environ.get('TELEGRAM_TOKEN')
-
 def start(update, context):
     update.message.reply_text('বটটি সচল হয়েছে!')
 
 def main():
-    updater = Updater(TOKEN, use_context=True)
+    token = os.environ.get('TELEGRAM_TOKEN')
+    # নতুন ভার্সনের জন্য use_context সরিয়ে ফেলেছি
+    updater = Updater(token)
     updater.dispatcher.add_handler(CommandHandler('start', start))
+    print("Bot is running...")
     updater.start_polling()
     updater.idle()
 
